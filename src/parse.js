@@ -33,14 +33,15 @@ var parseTokenTimezoneHHMM = /^([+-])(\d{2}):?(\d{2})$/;
  * @param {string} dateStr
  * @return {date} parsed date in local time zone.
  */
-var parse = function(dateStr) {
+var parse = function(dateStr, options) {
   var dateStrings = splitDateString(dateStr);
   var parsedDate = parseDate(dateStrings.date);
+  options = options || {};
 
   if (dateStrings.time) {
     parsedDate = parseTime(parsedDate, dateStrings.time);
 
-    if (dateStrings.timezone) {
+    if (dateStrings.timezone && !options.ignoreTimezone) {
       parsedDate = parseTimezone(parsedDate, dateStrings.timezone);
     }
   }

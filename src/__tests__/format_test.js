@@ -135,5 +135,14 @@ describe('format', function() {
       expect(format(this._date, 's ss')).to.be.equal('0 00');
     });
   });
+
+  describe('timezones', function(){
+    it('date in + timezone', function () {
+      expect(format('2005-07-08T23:59:59+0430', 'YYYY-MM-DD HH:mm')).to.be.equal('2005-07-08 23:59');
+    });
+    it('date in - timezone', function () {
+      expect(format('2005-07-08T00:00:00-0700', 'YYYY-MM-DD HH:mm')).to.be.equal('2005-07-08 00:00');
+    });
+  });
 });
 

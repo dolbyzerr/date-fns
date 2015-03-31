@@ -1,5 +1,6 @@
 var startOfDay = require('./start_of_day');
 var startOfYear = require('./start_of_year');
+var parse = require('./parse');
 
 var NUMBER_OF_MS_IN_DAY = 864e5;
 
@@ -10,7 +11,13 @@ var NUMBER_OF_MS_IN_DAY = 864e5;
  * @returns {string}
  */
 var format = function(date, format) {
-  date = date instanceof Date ? date : new Date(date);
+  if(typeof date == 'number'){
+
+    date = new Date(date);
+    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  } else if(typeof date == 'string'){
+    date = new Date(parse(date, {ignoreTimezone: true}));
+  }
 
   if (!format) {
     format = 'YYYY-MM-DDTHH:mm:ss.SSSZ';

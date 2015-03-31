@@ -124,6 +124,12 @@ describe('parse', function() {
         expect(result).to.be.eql(new Date('2014-10-25T13:46:20+07:00'));
       });
     });
+    context('ignore timezone option', function(){
+      it('ignores timezone with option provided', function () {
+        var result = parse('2014-10-25T13:46:20-0700', {ignoreTimezone: true});
+        expect(result).to.be.eql(new Date(2014, 9, 25, 13,46, 20))
+      });
+    });
   });
 
   describe('plain time', function() {

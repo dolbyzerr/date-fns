@@ -2,7 +2,7 @@ var endOfDay = require('../end_of_day');
 
 describe('endOfDay', function() {
   it('returns date with time setted to 23:59:59.999', function() {
-    var date = new Date('2014-09-02T11:55:00');
+    var date = new Date(2014, 8 /* starts from 0 */, 2, 11, 55);
     var result = endOfDay(date);
     expect(result).to.be.eql(
       new Date(2014, 8 /* starts from 0 */, 2, 23, 59, 59, 999)
@@ -18,7 +18,7 @@ describe('endOfDay', function() {
   });
 
   it('accepts timestamp', function() {
-    var date = new Date('2014-09-02T11:55:00').getTime();
+    var date = new Date(2014, 8 /* starts from 0 */, 2, 11, 55).getTime();
     var result = endOfDay(date);
     expect(result).to.be.eql(
       new Date(2014, 8 /* starts from 0 */, 2, 23, 59, 59, 999)
@@ -29,6 +29,11 @@ describe('endOfDay', function() {
     var date = new Date('2014-09-02T11:55:00');
     endOfDay(date);
     expect(date).to.be.eql(new Date('2014-09-02T11:55:00'));
+  });
+
+  it('working with timezone', function() {
+    var date = new Date(2014, 8, 2, 11, 55);
+    expect(endOfDay(date)).to.be.eql(new Date(2014, 8, 2, 23, 59, 59, 999));
   });
 });
 

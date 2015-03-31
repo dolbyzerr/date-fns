@@ -2,7 +2,8 @@ var startOfDay = require('../start_of_day');
 
 describe('startOfDay', function() {
   it('returns date with time setted to 00:00:00', function() {
-    var date = new Date('2014-09-02T11:55:00');
+    var date = new Date(2014, 8 /* starts from 0 */, 2, 11, 55)
+
     var result = startOfDay(date);
     expect(result).to.be.eql(
       new Date(2014, 8 /* starts from 0 */, 2, 0, 0, 0, 0)
@@ -18,7 +19,7 @@ describe('startOfDay', function() {
   });
 
   it('accepts timestamp', function() {
-    var date = new Date('2014-09-02T11:55:00').getTime();
+    var date = new Date(2014, 8 /* starts from 0 */, 2, 11, 55).getTime();
     var result = startOfDay(date);
     expect(result).to.be.eql(
       new Date(2014, 8 /* starts from 0 */, 2, 0, 0, 0, 0)
